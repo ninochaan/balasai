@@ -18,7 +18,7 @@ Every answer carries a badge showing its real serving path (`response.inferenceS
 
 ## Try it
 
-- **Live demo:** _(GitHub Pages URL — added at deployment)_
+- **Live demo:** https://ninochaan.github.io/balasai/
 - **Run locally:** any static server, e.g. `npx serve .` or `python3 -m http.server`, then open the page in Chrome.
 - Three built-in sample conversations (Indonesian, English, and a mixed ID/EN thread) give a result in two clicks.
 
