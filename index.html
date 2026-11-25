@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BalasAI — Private AI triage & replies for WhatsApp sellers</title>
+  <meta name="description" content="Paste a customer conversation: get instant triage and a ready-to-send reply. On-device with Gemini Nano when Chrome offers it, cloud deep-dive when you need it — powered by Firebase AI Logic hybrid inference." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b6e4f" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Firebase JS SDK (hybrid inference needs v12.5.0+; pinned to v13.0.0).
+       Verify these CDN paths in the Day-1 smoke test; fallback: newest 12.x ≥ 12.5.0. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js",
+      "firebase/ai": "https://www.gstatic.com/firebasejs/13.0.0/firebase-ai.js",
+      "firebase/app-check": "https://www.gstatic.com/firebasejs/13.0.0/firebase-app-check.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>BalasAI</h1>
+      <p class="tagline">Private AI triage &amp; reply drafting for WhatsApp sellers.<br />
+      Fast answers on-device with Gemini Nano — a cloud deep-dive only when you ask.
+      Powered by <strong>Firebase AI Logic hybrid inference</strong>.</p>
+      <p id="nanoStatus" class="nano-status">Checking Gemini Nano on this device…</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="configBanner" class="banner" hidden>
+      <strong>Demo mode — Firebase is not configured yet.</strong>
+      Paste a real <code>firebaseConfig</code> into <code>js/firebase-config.js</code>
+      (see README → Setup) to enable live AI. The UI below is fully explorable.
+    </div>
+
+    <div id="errorBox" class="error" role="alert" hidden></div>
+
+    <section class="panel">
+      <h2>1 · Paste a customer conversation</h2>
+      <textarea id="conversation" rows="9" placeholder="Paste a WhatsApp conversation here — a single message or a whole thread, in any language…"></textarea>
+      <div class="row">
+        <span id="charCount" class="muted">0 chars</span>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" data-sample="id">Sample: Indonesian complaint</button>
+        <button type="button" class="ghost" data-sample="en">Sample: English bulk order</button>
+        <button type="button" class="ghost" data-sample="mix">Sample: Mixed ID/EN payment</button>
+      </div>
+      <div class="row actions">
+        <button type="button" id="triageBtn" class="primary">Triage it</button>
+        <label class="tone">Tone
+          <select id="tone">
+            <option value="friendly">Friendly</option>
+            <option value="formal">Formal</option>
+            <option value="short">Short</option>
+          </select>
+        </label>
+        <button type="button" id="draftBtn" disabled>Draft a reply</button>
+        <button type="button" id="deepBtn" class="ghost">Deep dive (cloud)</button>
+      </div>
+      <p class="hint">Triage and reply drafting prefer your on-device model — the conversation
+      never leaves this computer when Gemini Nano answers. Deep dive deliberately uses the cloud
+      for long threads.</p>
+    </section>
+
+    <section id="triageCard" class="panel result" hidden></section>
+
+    <section id="replyBox" class="panel result" hidden>
+      <div class="triage-head"><h3>Suggested reply</h3><span id="replyRoute"></span></div>
+      <pre id="replyText" class="reply"></pre>
+      <button type="button" id="copyBtn" class="primary">Copy reply</button>
+    </section>
+
+    <section id="deepBox" class="panel result" hidden>
+      <div class="triage-head"><h3>Deep dive</h3><span id="deepRoute"></span></div>
+      <pre id="deepText" class="deep"></pre>
+    </section>
+
+    <section class="panel">
+      <h2>Route log — which brain answered?</h2>
+      <p class="hint">Every request reports its real serving path
+      (<code>response.inferenceSource</code>). On-device answers are private, free, and work offline;
+      cloud answers need the network.</p>
+      <ul id="routeLog" class="route-log">
+        <li class="muted">No requests yet.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>History (this device only)</h2>
+      <ul id="historyList" class="history"></ul>
+      <button type="button" id="clearHistory" class="ghost">Clear history</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Built with Firebase AI Logic hybrid inference (Gemini Nano on-device + Gemini in the cloud).
+      Your conversations are processed where the badge says — and history never leaves this device.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

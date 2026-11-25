@@ -1,0 +1,114 @@
+:root {
+  --green: #0b6e4f;
+  --green-dark: #084c37;
+  --ink: #17211c;
+  --muted: #5c6b63;
+  --bg: #f4f7f5;
+  --panel: #ffffff;
+  --line: #dbe4de;
+  --cloud: #6b4fa1;
+  --device: #0b6e4f;
+  --danger-bg: #fdecea;
+  --danger: #8f1d12;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+.site-header {
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: #fff;
+  padding: 36px 0 26px;
+}
+.site-header h1 { margin: 0 0 6px; font-size: 2.2rem; letter-spacing: -0.02em; }
+.tagline { margin: 0 0 14px; max-width: 62ch; opacity: 0.95; }
+.nano-status {
+  display: inline-block; margin: 0; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16); font-size: 0.9rem;
+}
+
+main { padding: 22px 0 8px; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; margin-bottom: 16px;
+}
+.panel h2 { margin: 0 0 12px; font-size: 1.1rem; }
+.panel h3 { margin: 0; font-size: 1.05rem; }
+
+.banner {
+  background: #fff7e0; border: 1px solid #ecd27a; border-radius: var(--radius);
+  padding: 12px 16px; margin-bottom: 16px;
+}
+.error {
+  background: var(--danger-bg); color: var(--danger); border: 1px solid #f2b8ae;
+  border-radius: var(--radius); padding: 12px 16px; margin-bottom: 16px; white-space: pre-wrap;
+}
+
+textarea {
+  width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 10px;
+  font: inherit; resize: vertical; background: #fbfcfb;
+}
+textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.row.actions { margin-top: 14px; }
+.spacer { flex: 1; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.hint { color: var(--muted); font-size: 0.92rem; margin: 12px 0 0; }
+
+button {
+  font: inherit; cursor: pointer; border-radius: 999px; border: 1px solid var(--line);
+  background: #fff; color: var(--ink); padding: 8px 16px;
+}
+button:hover:not(:disabled) { border-color: var(--green); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.primary { background: var(--green); border-color: var(--green); color: #fff; font-weight: 600; }
+button.primary:hover:not(:disabled) { background: var(--green-dark); }
+button.ghost { background: transparent; }
+
+.tone select {
+  font: inherit; padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: #fff;
+}
+
+.triage-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.triage-card dl, .result dl {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 0 0 10px;
+}
+.result dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.result dd { margin: 2px 0 0; font-weight: 600; }
+
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; white-space: nowrap;
+}
+.badge-device { background: var(--device); }
+.badge-cloud { background: var(--cloud); }
+
+.urgency { padding: 1px 8px; border-radius: 999px; color: #fff; font-size: 0.85em; }
+.urgency-low { background: #6b8f71; }
+.urgency-medium { background: #c98a12; }
+.urgency-high { background: #b3261e; }
+
+pre.reply, pre.deep {
+  white-space: pre-wrap; word-break: break-word; font: inherit;
+  background: #fbfcfb; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 12px;
+}
+
+.route-log, .history { list-style: none; margin: 0; padding: 0; }
+.route-log li, .history li { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.route-log li:last-child, .history li:last-child { border-bottom: none; }
+.log-task { font-weight: 600; margin-right: 6px; }
+.log-meta { color: var(--muted); font-size: 0.88rem; margin-left: 6px; }
+
+.site-footer { color: var(--muted); font-size: 0.9rem; padding: 10px 0 30px; }
